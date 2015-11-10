@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<TITLE>Muhammad Moaz Khan lab 7</TITLE>
+<TITLE>Muhammad Moaz Khan lab 8</TITLE>
 <style>
 #myButtons{
 	visibility:hidden;
@@ -62,18 +62,36 @@ var dynamicFormName;
 function addForm() {
 	dynamicFormName = prompt("Form Name: ");
 	document.getElementById("myButtons").style.visibility = "visible"
-	document.getElementById("fields").innerHTML="<form class=\"dynamicForm\" name="+dynamicFormName+"action=\"#\">"
+	document.getElementById("fields").innerHTML="<form id=\"form\" class=\"dynamicForm\" name="+dynamicFormName+"action=\"#\">"
 	+"<input type = \"submit\" value = \"submit\"/></form>";
+	
 
 }
 
 function createText(){
 		var labelName = prompt("Enter label");
-		$(".dynamicForm").append(labelName+"<input type=\"text\" name=\" "+labelName+"\" id=\"" + labelName+"\" />");	
+		var max = prompt("Enter max characters ");
+		var required = prompt("Required true/false");
+		if(required == true){
+				$("input").attr("required", required);
+		}else{
+				$("input").attr("required", false);
+		}
+		
+		$(".dynamicForm").append(labelName+"<input type=\"text\" name=\" "+labelName+"\" id=\"" + labelName+"\"maxlength=\""+max+"\" />");	
 }
 function createPass(){
 		var labelName = prompt("Enter name or id");
-		$(".dynamicForm").append("Password <input type=\"password\" name=\" "+labelName+"\" id=\"" + labelName+"\" />");	
+		var max = prompt("Enter max characters ");
+		
+		var required = prompt("Required true/false");
+		if(required == true){
+				$("input").attr("required", required);
+		}else{
+				$("input").attr("required", false);
+		}
+		
+		$(".dynamicForm").append("Password <input type=\"password\" name=\" "+labelName+"\" id=\"" + labelName+"\"maxlength=\""+max+"\" />");	
 }
 
 function createTextArea(){
@@ -83,62 +101,177 @@ function createTextArea(){
 		$(".dynamicForm").append(labelName+"<textarea name=\"textarea\" cols=\""+col+"\" rows=\""+row+"\">"+labelName+"</textarea>");	
 		}
 
-function createNum(){
+function createNumber(){
 		var labelName = prompt("Enter name");
-		$(".dynamicForm").append(labelName+"<input type=\"number\" name=\" "+labelName+"\" id=\"" + labelName+"\" />");	
+		var min = prompt("Enter min number ");
+		var max = prompt("Enter max number ");
+		
+		var required = prompt("Required true/false");
+		if(required == true){
+				$("input").attr("required", required);
+		}else{
+				$("input").attr("required", false);
+		}
+		
+		
+		$(".dynamicForm").append(labelName+"<input type=\"number\" name=\" "+labelName+"\" id=\"" + labelName+"\"max=\""+max+"\"min=\""+min+"\" />");	
 }
 
 
 function createRadio(){
 		var labelName = prompt("Enter option name");
+		var required = prompt("Required true/false");
+		if(required == true){
+				$("input").attr("required", required);
+		}else{
+				$("input").attr("required", false);
+		}
+		
 		$(".dynamicForm").append("<input type=\"radio\" name=\" "+labelName+"\" id=\"" + labelName+"\" />"+labelName);	
 }
 
 function createCheck(){
 		var labelName = prompt("Enter option name");
+		var required = prompt("Required true/false");
+		if(required == true){
+				$("input").attr("required", required);
+		}else{
+				$("input").attr("required", false);
+		}
+		
 		$(".dynamicForm").append("<input type=\"checkbox\" name=\" "+labelName+"\" id=\"" + labelName+"\" />"+labelName);	
 }
 function createDataList(){
-		var name = prompt("Enter name of Select:");
-		$(".dynamicForm").append("<datalist id=\""+name+"\">");
+		var name = prompt("Enter name of Datalist:");
+		$(".dynamicForm").append("<select id=\did\">");
 		var num=prompt("Number of options");
 		x=parseInt(num);
 	
 		for (i=0; i<x; i++){
 			n=prompt("Enter Option "+i);
-			 $(".dynamicForm").append("<option value=\""+n+"\">"+n+"</option>" );   
+			 $("#did").append("<option value=\""+n+"\">"+n+"</option>" );   
 		}
 		 $(".dynamicForm").append("</datalist>" );   
 	
 }
 
+
+
+
 function createSelect(){
-		var name = prompt("Enter name of Select:");
-		$(".dynamicForm").append("<select name=\""+name+"\">");
+		var id = prompt("Enter name of Select:");
+		
+		var required = prompt("Required true/false");
+		if(required == true){
+				$("input").attr("required", required);
+		}else{
+				$("input").attr("required", false);
+		}
+		
+		$(".dynamicForm").append("<select id=\sid\">");
 		var num=prompt("Number of options");
 		x=parseInt(num);
-	
+	    var sid = "#"+name;
 		for (i=0; i<x; i++){
 			n=prompt("Enter Option "+i);
-			 $(".dynamicForm").append("<option value=\""+n+"\">"+n+"</option>" );   
+			 $('#sid').append("<option value=\""+n+"\">"+n+"</option>" );
+				
+			
 		}
 		 $(".dynamicForm").append("</select>" );   
 	
 }
-function createNumber(){
-		var labelName = prompt("Enter option name");
-		$(".dynamicForm").append("<input type=\"number\" name=\" "+labelName+"\" id=\"" + labelName+"\" />");	
-}
+
 function createKeygen(){
-		var labelName = prompt("Enter option name");
-		$(".dynamicForm").append("<input type=\"keygen\" name=\" "+labelName+"\" id=\"" + labelName+"\" />");	
+		var labelName = prompt("Enter name");
+		
+		var required = prompt("Required true/false");
+		if(required == true){
+				$("input").attr("required", required);
+		}else{
+				$("input").attr("required", false);
+		}
+		
+		$(".dynamicForm").append(labelName+"<keygen name=\" "+labelName+"\" id=\"" + labelName+"\" />");	
 }
 function createFile(){
-		var labelName = prompt("Enter option name");
+		var labelName = prompt("Enter File name");
 		$(".dynamicForm").append("<input type=\"file\" name=\" "+labelName+"\" id=\"" + labelName+"\" />");	
 }
+
+
+function validateForm() {
+		var input = document.getElementsByTagName("input");
+		var i;		
+		for(i = 0; i < input.length; i++)
+		{
+
+			if(input[i].required == true)
+			{
+				if(input[i].value !=""){
+				
+					alert("Field must not be empty")
+					return false;
+					}
+				
+			}
+		}
+		
+	}
+
+$(document).on('submit','form.remember',function(){
+   validateForm();
+});
+//For JSON
 function createOutput(){
-		alert(myJSON);
+
+
+
+		function getAttrs(DOMelement) {
+    var obj = {};
+    $.each(DOMelement.attributes, function () {
+        if (this.specified) {
+            obj[this.name] = this.value;
+        }
+    });
+    return obj;
+}
+
+$("form").each(function () {
+    var json = {
+        "form": []
+    };
+    $(this).find("input").each(function () {
+        json.form.push(getAttrs(this));
+    });
+
+    $(this).find("select").each(function () {
+        var select = getAttrs(this);
+        select["type"] = "select";
+        var options = [];
+        $(this).children().each(function () {
+            options.push(getAttrs(this));
+        });
+        select["options"] = options;
+        json.form.push(select);
+    });
+	var myString = JSON.stringify(json);
+	localStorage.setItem('myJson',myString);
+	alert("DATA SENT TO HTML5 localSTORAGE");
+    //console.log(json);
+	
+	getJsonData();
+});
+}
+
+
+//QUIZ addition
+function getJsonData(){
+	var myJSON = localStorage.getItem('myJson');
+	alert(myJSON);
+	var parsedJSON = JSON.parse(myJSON);
+	document.getElementById("fields").innerHTML="<form class=\"dynamicForm\" name="+parsedJSON.form[0]+"action=\"#\">"
+	+"<input type = \"submit\" value = \"submit\"/></form>";
 }
 </script>
 </HEAD>
@@ -155,7 +288,7 @@ function createOutput(){
 		<button onClick="createNumber()">Create Number</button>
 		<button onClick="createKeygen()">Create Keygen</button>
 		<button onClick="createTextArea()">Create Text Area</button>
-		<button onClick="createOutput()">Create Output</button>
+		<button onClick="createOutput()">Create JSON</button>
 	</div>
 	<br>
 	<hr>
